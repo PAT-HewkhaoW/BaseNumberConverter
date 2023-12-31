@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hexadecimal to Decimal Converter</title>
+  </head>
+  <body>
+    <h1>Hexadecimal to Decimal Converter</h1>
+
+    <form onsubmit="convertHexToDecimal(); return false;">
+      <label for="hexInput">Enter Hexadecimal Number: </label>
+      <input type="text" id="hexInput" required />
+      <button type="submit">Convert</button>
+    </form>
+
+    <p id="result"></p>
+    <!-- DONE -->
+    <script>
+      function convertHexToDecimal() {
+        var hexInput = document.getElementById("hexInput").value;
+
+        if (hexInput.trim() === "") {
+          alert("Please enter a hexadecimal number");
+          return;
+        }
+
+        var decimalResult = hexToDecimal(hexInput);
+        document.getElementById("result").innerHTML =
+          "Result is: " + decimalResult;
+      }
+
+      function hexToDecimal(hex) {
+        if (!/^[0-9A-Fa-f]+$/.test(hex)) {
+          return "Please enter a hexadecimal number.";
+        }
+
+        var decimal = "0";
+        const hexDigits = "0123456789ABCDEF";
+
+        for (let i = 0; i < hex.length; i++) {
+          const digit = hexDigits.indexOf(hex[i]);
+          if (digit === -1) {
+            throw new Error("Invalid hexadecimal digit");
+          }
+          decimal = decimal * 16 + digit;
+        }
+        return decimal;
+      }
+    </script>
+  </body>
+</html>

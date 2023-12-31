@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Decimal to Hexadecimal Converter</title>
+  </head>
+  <body>
+    <h1>Decimal to Hexadecimal Converter</h1>
+
+    <form onsubmit="convertDecimalToHex(); return false;">
+      <label for="decimalInput">Enter Decimal Number: </label>
+      <input type="number" id="decimalInput" required />
+      <button type="submit">Convert</button>
+    </form>
+
+    <p id="result"></p>
+    <!-- DONE -->
+    <script>
+      function convertDecimalToHex() {
+        var decimalInput = document.getElementById("decimalInput").value;
+
+        if (decimalInput.trim() === "") {
+          return "Please enter a decimal number";
+        }
+
+        var hexResult = decimalToHex(decimalInput);
+        document.getElementById("result").innerHTML = "result is: " + hexResult;
+      }
+
+      function decimalToHex(decimal) {
+        if (decimal < 0) {
+          throw new Error("Input must be a non-negative integer");
+        }
+
+        if (decimal === 0) {
+          return "0";
+        }
+
+        const hexDigits = "0123456789ABCDEF";
+        let hex = "";
+
+        while (decimal > 0) {
+          const remainder = decimal % 16;
+          hex = hexDigits[remainder] + hex;
+          decimal = Math.floor(decimal / 16);
+        }
+
+        return hex;
+      }
+    </script>
+  </body>
+</html>

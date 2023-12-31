@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hexadecimal to Binary Converter</title>
+  </head>
+  <body>
+    <h1>Hexadecimal to Binary Converter</h1>
+
+    <form onsubmit="convertHexToBinary(); return false;">
+      <label for="hexInput">Enter Hexadecimal Number: </label>
+      <input type="text" id="hexInput" required />
+      <button type="submit">Convert</button>
+    </form>
+
+    <p id="result"></p>
+    <!-- DONE -->
+    <script>
+      function convertHexToBinary() {
+        var hexInput = document.getElementById("hexInput").value;
+
+        if (hexInput.trim() === "") {
+          alert("Please enter a hexadecimal number.");
+          return;
+        }
+
+        var binaryResult = hexToBinary(hexInput);
+        document.getElementById("result").innerHTML =
+          "Result is: " + binaryResult;
+      }
+
+      function hexToBinary(hex) {
+        const decimal = hexToDecimal(hex);
+        const binary = decimalToBinary(decimal);
+        return binary;
+      }
+
+      function hexToDecimal(hex) {
+        const hexUpperCase = hex.toUpperCase();
+        const hexDigits = "0123456789ABCDEF";
+        let decimal = 0;
+
+        for (let i = 0; i < hexUpperCase.length; i++) {
+          const digit = hexDigits.indexOf(hexUpperCase[i]);
+          if (digit === -1) {
+            throw new Error("Invalid hexadecimal digit");
+          }
+          decimal = decimal * 16 + digit;
+        }
+
+        return decimal;
+      }
+
+      function decimalToBinary(decimal) {
+        if (decimal === 0) {
+          return "0";
+        }
+
+        let binary = "";
+        while (decimal > 0) {
+          const remainder = decimal % 2;
+          binary = remainder.toString() + binary;
+          decimal = Math.floor(decimal / 2);
+        }
+
+        return binary;
+      }
+    </script>
+  </body>
+</html>

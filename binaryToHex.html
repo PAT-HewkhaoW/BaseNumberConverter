@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Binary to Hexadecimal Converter</title>
+  </head>
+  <body>
+    <h1>Binary to Hexadecimal Converter</h1>
+
+    <form onsubmit="convertBinaryToHex(); return false;">
+      <label for="binaryInput">Enter Binary Number: </label>
+      <input type="text" id="binaryInput" required />
+      <button type="submit">Convert</button>
+    </form>
+
+    <p id="result"></p>
+    <!-- DONE -->
+    <script>
+      function convertBinaryToHex() {
+        var binaryInput = document.getElementById("binaryInput").value;
+
+        if (binaryInput.trim() === "") {
+          alert("Please enter a binary number.");
+          return;
+        }
+
+        var hexResult = binaryToHex(binaryInput);
+        document.getElementById("result").innerHTML = "Result is: " + hexResult;
+      }
+
+      function binaryToHex(binary) {
+        var decimal = binaryToDecimal(binary);
+        var hex = decimalToHex(decimal);
+        return hex;
+      }
+
+      function binaryToDecimal(binary) {
+        var decimal = 0;
+        var binaryArray = binary.split("").reverse();
+
+        for (var i = 0; i < binaryArray.length; i++) {
+          if (binaryArray[i] === "1") {
+            decimal += Math.pow(2, i);
+          }
+        }
+
+        return decimal;
+      }
+
+      function decimalToHex(decimal) {
+        return decimal.toString(16).toUpperCase();
+      }
+    </script>
+  </body>
+</html>

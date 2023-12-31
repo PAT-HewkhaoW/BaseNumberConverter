@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style></style>
+  </head>
+  <body>
+    <label for="binaryInput">Enter Binary Number: </label>
+    <input type="text" id="binaryInput" />
+    <button onclick="convertBinaryToDecimal()">Convert</button>
+
+    <p id="display">Decimal Result:</p>
+
+    <div class="stepctn">
+      <div>steps :</div>
+      <div id="displaysteps"></div>
+    </div>
+    <!-- DONE -->
+
+    <script>
+      var steps = [];
+      function convertBinaryToDecimal() {
+        steps = [];
+
+        var binaryInput = document.getElementById("binaryInput").value;
+
+        // Validate the input
+        if (/^[01]+$/.test(binaryInput)) {
+          var decimalResult = 0;
+          steps = [];
+          document.getElementById("displaysteps").innerHTML = "";
+
+          var binaryLength = binaryInput.length;
+          <!-- var dsteps = document.getElementById("displaysteps").innerHTML; -->
+
+          for (var i = 0; i < binaryLength; i++) {
+            var digit = parseInt(binaryInput[binaryLength - 1 - i]);
+            decimalResult += digit * Math.pow(2, i);
+            steps.push(digit * Math.pow(2, i));
+            console.log(steps);
+            document.getElementById("displaysteps").innerHTML +=
+              " 2^" + i + "*" + digit + " = " + digit * Math.pow(2, i) + "<br>";
+          }
+
+          document.getElementById("displaysteps").innerHTML +=
+            "result is " + decimalResult;
+
+          document.getElementById("display").textContent =
+            "Decimal Result: " + decimalResult;
+        } else {
+          document.getElementById("display").textContent =
+            "Invalid binary input. Please enter a valid binary number.";
+        }
+      }
+    </script>
+  </body>
+</html>
